@@ -3,7 +3,7 @@ const ProblemDetails = () => {
     return (
         <div>
             <Head>
-                <title>Problem Details</title>
+                <title>Problem Details | Developer Hunt</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <h1>This is the details page</h1>
