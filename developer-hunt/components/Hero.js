@@ -1,7 +1,7 @@
 import { Player } from '@lottiefiles/react-lottie-player';
 const Hero = () => {
     return (
-        <div className="py-20">
+        <div className="py-10">
 
             <p className="text-7xl font-serif text-center">
                 Developer Hunt
