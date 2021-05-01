@@ -1,15 +1,13 @@
 import Head from 'next/head'
-const Ideas = () => {
-
-    return (
+const SignUp = () => {
+    return ( 
         <div>
             <Head>
-                <title>Ideas | Developer Hunt</title>
+                <title>Sign Up | Developer Hunt</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
         </div>
-    )
-
+     );
 }
-
-export default Ideas;
+ 
+export default SignUp;
