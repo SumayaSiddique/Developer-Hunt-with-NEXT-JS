@@ -15,7 +15,7 @@ const Internships = () => {
                 />
 
                 <div>
-                    <p className="text-5xl font-mono my-5 max-w-lg">Getting a job after graduation is a tough task</p>
+                    <p className="text-5xl font-serif my-5 max-w-lg">Getting a job after graduation is a tough task</p>
                     <p className="text-xl font-mono text-gray-500 max-w-md">You have come to the right place where you can get internships for free.</p>
 
                 </div>

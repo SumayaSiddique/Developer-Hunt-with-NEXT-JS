@@ -8,10 +8,10 @@ const problems = () => {
                 <title>Problems | Developer Hunt</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <div className="grid sm:grid-cols-1  xl:grid-cols-2 items-center my-10">
+            <div className="grid sm:grid-cols-1 xl:grid-cols-2 items-center my-10 ">
                 <div>
-                    <p className="text-5xl font-mono my-5 ">Pulling out your hair for a bug?</p>
-                    <p className="text-xl font-mono text-gray-500">Come, seek help to your new online colleagues</p>
+                    <p className="text-5xl font-serif my-5 ">Pulling out your hair for a bug?</p>
+                    <p className="text-xl font-mono text-gray-500 max-w-md">Come, seek help to your new online colleagues</p>
 
                 </div>
                 <Player

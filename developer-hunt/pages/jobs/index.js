@@ -11,7 +11,7 @@ const Jobs = () => {
 
             <div className="grid sm:grid-cols-1  xl:grid-cols-2 items-center my-10">
                 <div>
-                    <p className="text-5xl font-mono my-5 ">Trying to land a job in the tech industry?</p>
+                    <p className="text-5xl font-serif my-5 ">Trying to land a job in the tech industry?</p>
                     <p className="text-xl font-mono text-gray-500">You have come to the right place!</p>
 
                 </div>
