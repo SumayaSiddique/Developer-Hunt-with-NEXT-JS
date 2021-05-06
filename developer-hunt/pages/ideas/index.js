@@ -22,7 +22,6 @@ const Ideas = () => {
             Getting sponsors for your project has never been easier.
           </p>
         </div>
-
       </div>
     </div>
   );

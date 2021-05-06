@@ -1,14 +1,10 @@
-import { Player } from '@lottiefiles/react-lottie-player';
+import { Player } from "@lottiefiles/react-lottie-player";
 import Head from "next/head";
-import React, { useState } from 'react'
-
-
-
-
+import React, { useState } from "react";
 
 function Login() {
-  const [email, setemail] = useState('')
-  const [password, setpassword] = useState('')
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
   return (
     <div>
       <Head>
@@ -37,27 +33,25 @@ function Login() {
           <button
             className="p-3 bg-blue-300 text-black text-2xl text-center rounded-md mx-auto cursor-pointer"
             onClick={() => {
-              login(email, password)
+              login(email, password);
             }}
-          >Login</button>
-
+          >
+            Login
+          </button>
         </div>
 
         <Player
           autoplay
           loop
-          src="https://assets2.lottiefiles.com/packages/lf20_i98z7y0a.json"
+          src="https://assets3.lottiefiles.com/packages/lf20_BhWJsn.json"
         />
-
       </div>
-
     </div>
-  )
+  );
 }
 
 function login(email, password) {
   console.log(email, password);
 }
 
-export default Login
-
+export default Login;
