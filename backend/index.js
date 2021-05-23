@@ -98,24 +98,64 @@ app.get("/problem", (req, res) => {
     });
 });
 
+app.get("/problem/id", (req, res) => {
+    // console.log(req.params);
+    // console.log(req.query);
+    const P_Id = req.query.P_Id
+    // console.log(P_Id);
+    db.query(`SELECT * FROM problem WHERE P_ID = ${P_Id}`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+
 app.post("/problem", (req, res) => {
     const P_Title = req.body.P_Title;
     const P_description = req.body.P_description;
     const Category = req.body.Category
     const Date_posted = req.body.Date_posted
-    const IdNo = req.body.IdNo
 
-    db.query(
-        "INSERT INTO PROBLEM(P_Title, Category, P_description,  Date_posted,  IdNo) VALUES (?,?,?,?,?)",
-        [P_Title, P_description, Category, Date_posted, IdNo],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                res.send("Problem Post Successfully Created");
-            }
+    const UID = req.body.UID
+
+    // get the IdNo from members table 
+
+
+    db.query(`SELECT IdNo FROM members WHERE UID = '${UID}'`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            const IdNo = result[0].IdNo
+            console.log(IdNo);
+            db.query(
+                "INSERT INTO PROBLEM(P_Title, Category, P_description,  Date_posted,  IdNo) VALUES (?,?,?,?,?)",
+                [P_Title, Category, P_description, Date_posted, IdNo],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.send("Problem Post Successfully Created");
+                    }
+                }
+            );
         }
-    );
+    });
+    // console.log(IdNo);
+
+    // db.query(
+    //     "INSERT INTO PROBLEM(P_Title, Category, P_description,  Date_posted,  IdNo) VALUES (?,?,?,?,?)",
+    //     [P_Title, Category, P_description, Date_posted, IdNo],
+    //     (err, result) => {
+    //         if (err) {
+    //             console.log(err);
+    //         } else {
+    //             res.send("Problem Post Successfully Created");
+    //         }
+    //     }
+    // );
 });
 
 app.get("/internship", (req, res) => {
