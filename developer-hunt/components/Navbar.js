@@ -2,6 +2,11 @@ import { FireIcon, HomeIcon, LightBulbIcon, PuzzleIcon, SparklesIcon, UserIcon }
 import NavItem from './NavItem'
 import Link from 'next/link'
 
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import { FaPowerOff } from 'react-icons/fa'
+
+
 const Navbar = () => {
     return (
         <div className="flex flex-col sm:flex-row justify-between bg-gray-900 p-4 ">
@@ -33,11 +38,15 @@ const Navbar = () => {
                     </a>
                 </Link>
             </div>
-            <Link href="/login">
-                <a>
-                    <NavItem title="USER" Icon={UserIcon} />
-                </a>
-            </Link>
+
+            <button onClick={() => {
+                const auth = firebase.auth()
+                auth.signOut()
+            }}>
+                <NavItem title="Sign Out" Icon={FaPowerOff} />
+            </button>
+
+
 
         </div>
     );

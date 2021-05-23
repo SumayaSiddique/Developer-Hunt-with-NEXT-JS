@@ -1,7 +1,20 @@
 import { Player } from '@lottiefiles/react-lottie-player';
 import ProblemThumbnail from "../../components/problems/ProblemThumbnail"
 import Head from 'next/head'
-const problems = () => {
+import CustomForm from '../../components/CustomForm';
+import { useEffect, useState } from 'react'
+import Axios from "axios";
+
+
+function problems() {
+    const [problemList, setproblemList] = useState([])
+    useEffect(() => {
+        Axios.get('http://localhost:3001/problem').then((res) => {
+            // console.log(res.data);
+            setproblemList(res.data)
+        })
+
+    }, []);
     return (
         <div>
             <Head>
@@ -21,15 +34,18 @@ const problems = () => {
                 />
 
             </div>
+
+            <CustomForm />
+
             {/* problem list with the ProblemThumbnail */}
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {
+                    problemList.map((problem, index) => {
+                        return <ProblemThumbnail key={index} data={problem} />
+                    })
+                }
 
-                <ProblemThumbnail userName="Imran" title="NEXT JS tailwind not working" details="asdasdasd" />
-                <ProblemThumbnail />
-                <ProblemThumbnail />
-                <ProblemThumbnail userName="Imran" title="NEXT JS tailwind not working" details="asdasdasd" />
-                <ProblemThumbnail />
-                <ProblemThumbnail />
+
             </div>
 
         </div>

@@ -1,11 +1,12 @@
 import Link from "next/link"
-const ProblemThumbnail = ({ title, userName }) => {
+const ProblemThumbnail = ({ title, userName, data }) => {
+    const P_Id = data.P_Id
     return (
-        <Link href={"/problems/" + "123123"} >
+        <Link href={"/problems/" + P_Id} >
             <a>
                 <div className="bg-gray-200 p-10 m-6 h-64 text-black rounded-lg transform hover:scale-110 transition duration-300 overflow-hidden ">
-                    <p className="text-3xl">{title ? title : "This is a sample title"}</p>
-                    <p className="text-xl text-gray-400">{userName ? userName : "Sample User"}</p>
+                    <p className="text-xl lg:text-3xl">{data.P_Title}</p>
+                    <p className="text-lg text-gray-400">{data.Category}</p>
                 </div>
             </a>
         </Link>
