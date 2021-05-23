@@ -2,7 +2,7 @@ import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
 import Layout from '../components/Layout'
 
-import Login from '../components/login/index'
+import Login from '../components/login/Login'
 
 
 import firebase from 'firebase/app'
