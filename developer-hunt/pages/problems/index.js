@@ -1,7 +1,7 @@
 import { Player } from '@lottiefiles/react-lottie-player';
-import ProblemThumbnail from "../../components/problems/ProblemThumbnail"
+import ProblemThumbnail from "../../components/ProblemThumbnail"
 import Head from 'next/head'
-import CustomForm from '../../components/CustomForm';
+import CustomForm from '../../components/Forms/AddAProblem';
 import { useEffect, useState } from 'react'
 import Axios from "axios";
 
@@ -36,7 +36,7 @@ function problems() {
             </div>
 
             <CustomForm />
-
+            <hr />
             {/* problem list with the ProblemThumbnail */}
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {
