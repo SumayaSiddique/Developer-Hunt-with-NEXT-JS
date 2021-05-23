@@ -1,6 +1,18 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import Head from "next/head";
+import IdeaThumbnail from '../../components/IdeaThumbnail'
+import { useEffect, useState } from 'react'
+import Axios from "axios";
+import AddAIdea from "../../components/Forms/AddIdea";
 const Ideas = () => {
+  const [ideaList, setideaList] = useState([])
+  useEffect(() => {
+    Axios.get('http://localhost:3001/idea').then((res) => {
+      // console.log(res.data);
+      setideaList(res.data)
+    })
+
+  }, []);
   return (
     <div>
       <Head>
@@ -22,6 +34,24 @@ const Ideas = () => {
             Getting sponsors for your project has never been easier.
           </p>
         </div>
+      </div>
+      <AddAIdea />
+      <hr />
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+
+        {
+          ideaList.map((idea, index) => {
+            return <IdeaThumbnail key={index} data={idea} />
+          })
+        }
+
+
+        {/* <JobThumbnail company="Developer Hunt" jobTitle="Junior Software Engineer" details="asdasdasd" />
+                <JobThumbnail />
+                <JobThumbnail />
+                <JobThumbnail company="ABC Company Limited" jobTitle="Senior React Developer" details="asdasdasd" />
+                <JobThumbnail />
+                <JobThumbnail /> */}
       </div>
     </div>
   );
