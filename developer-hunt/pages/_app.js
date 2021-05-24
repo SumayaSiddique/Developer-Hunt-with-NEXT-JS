@@ -9,6 +9,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 import { useAuthState } from 'react-firebase-hooks/auth'
+import AdminPanel from '../components/Admin/AdminPanel'
 
 
 if (!firebase.apps.length) {
@@ -39,7 +40,11 @@ function MyApp({ Component, pageProps }) {
 
   const auth = firebase.auth()
   const [user] = useAuthState(auth)
+
   if (user) {
+    if (user.email == 'admin@dev-hunt.com') {
+      return <AdminPanel />
+    }
     return (
       <Layout>
         <Component {...pageProps} />

@@ -7,9 +7,29 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 import Axios from "axios";
+import { useState } from 'react'
 
 function Login() {
   const auth = firebase.auth()
+  const [password, setpassword] = useState('')
+  const [email, setemail] = useState('')
+
+  function adminSignIn() {
+    console.log(email);
+    console.log(password);
+    const auth = firebase.auth()
+
+    auth.signInWithEmailAndPassword(email, password).catch((e) => {
+      console.log(e);
+    }).then(() => {
+      if (auth.currentUser) {
+        console.log('Signed in Successfully!');
+        // console.log(auth.currentUser.displayName);
+        // console.log(auth.currentUser.email);
+        // console.log(auth.currentUser.uid);        
+      }
+    })
+  }
   return (
     <div>
       <Head>
@@ -34,8 +54,30 @@ function Login() {
           </p>
         </div>
 
-        {/* <h1 className="text-3xl">{auth.currentUser ? auth.currentUser.displayName : "Please Sign In"}</h1> */}
-
+        <div className="my-44 flex flex-col items-center">
+          <h1 className="text-3xl ">Admin Login</h1>
+          <div className="my-4 w-full">
+            <label className="  font-bold md:text-right mb-1 md:mb-0 pr-4">
+              Admin Email
+                    </label>
+            <input className="bg-gray-200  border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+              type="email" onChange={(e) => { setemail(e.target.value) }} />
+          </div>
+          <div className="my-4 w-full">
+            <label className="  font-bold md:text-right mb-1 md:mb-0 pr-4">
+              Admin Password
+                    </label>
+            <input className="bg-gray-200  border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+              type="password" onChange={(e) => { setpassword(e.target.value) }} />
+          </div>
+          <div className="bg-blue-500 p-4 rounded-xl flex flex-row items-center cursor-pointer my-4 hover:scale-125  transition transform duration-300" onClick={() => {
+            adminSignIn()
+          }}>
+            <p className="text-white text-lg">
+              Admin Login
+          </p>
+          </div>
+        </div>
       </div>
 
 
@@ -66,5 +108,7 @@ function signInWithGoogle() {
     }
   })
 }
+
+
 
 export default Login;
