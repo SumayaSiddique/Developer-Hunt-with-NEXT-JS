@@ -34,20 +34,138 @@ app.post("/jobs", (req, res) => {
     const Job_description = req.body.Job_description;
     const Salary = req.body.Salary
     const Date_posted = req.body.Date_posted
-    const IdNo = req.body.IdNo
 
-    db.query(
-        "INSERT INTO job_post (Job_name, Company, Type, Skill,Job_description, Salary, Date_posted, IdNo) VALUES (?,?,?,?,?,?,?,?)",
-        [Job_name, Company, Type, Skill, Job_description, Salary, Date_posted, IdNo],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                res.send("Job Successfully Created");
-            }
+    const UID = req.body.UID
+
+    db.query(`SELECT IdNo FROM members WHERE UID = '${UID}'`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            const IdNo = result[0].IdNo
+            console.log(IdNo);
+            db.query(
+                "INSERT INTO job_post (Job_name, Company, Type, Skill,Job_description, Salary, Date_posted, IdNo) VALUES (?,?,?,?,?,?,?,?)",
+                [Job_name, Company, Type, Skill, Job_description, Salary, Date_posted, IdNo],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.send("Job Successfully Created");
+                    }
+                }
+            );
         }
-    );
+    });
+
+
+    // db.query(
+    //     "INSERT INTO job_post (Job_name, Company, Type, Skill,Job_description, Salary, Date_posted, IdNo) VALUES (?,?,?,?,?,?,?,?)",
+    //     [Job_name, Company, Type, Skill, Job_description, Salary, Date_posted, IdNo],
+    //     (err, result) => {
+    //         if (err) {
+    //             console.log(err);
+    //         } else {
+    //             res.send("Job Successfully Created");
+    //         }
+    //     }
+    // );
 });
+
+app.get("/job/id", (req, res) => {
+    // console.log(req.params);
+    // console.log(req.query);
+    const Job_Id = req.query.Job_Id
+    // console.log(P_Id);
+    db.query(`SELECT * FROM job_post WHERE Job_Id = ${Job_Id}`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+app.delete("/job", (req, res) => {
+    const Job_Id = req.query.Job_Id
+    // DELETE FROM internship WHERE internship_Id
+    db.query(`DELETE FROM job_post WHERE Job_Id = ${Job_Id}`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+app.delete("/idea", (req, res) => {
+    const Idea_Id = req.query.Idea_Id
+    // DELETE FROM internship WHERE internship_Id
+    db.query(`DELETE FROM idea WHERE Idea_Id = ${Idea_Id}`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+app.delete("/internship", (req, res) => {
+    const internship_Id = req.query.internship_Id
+    // DELETE FROM internship WHERE internship_Id
+    db.query(`DELETE FROM internship WHERE internship_Id = ${internship_Id}`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+app.delete("/problem", (req, res) => {
+    const P_Id = req.query.P_Id
+    // DELETE FROM internship WHERE internship_Id
+    db.query(`DELETE FROM problem WHERE P_Id = ${P_Id}`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -68,20 +186,44 @@ app.post("/idea", (req, res) => {
     const Category = req.body.Category;
     const Duration = req.body.Duration;
     const Date_posted = req.body.Date_posted
-    const IdNo = req.body.IdNo
     const Idea_name = req.body.Idea_name
 
-    db.query(
-        "INSERT INTO Idea (Idea_description, Budget, Category,  Duration,  Date_posted, IdNo, Idea_name) VALUES (?,?,?,?,?,?,?)",
-        [Idea_description, Budget, Category, Duration, Date_posted, IdNo, Idea_name],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                res.send("Idea Successfully Created");
-            }
+    const UID = req.body.UID
+
+    db.query(`SELECT IdNo FROM members WHERE UID = '${UID}'`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            const IdNo = result[0].IdNo
+            console.log(IdNo);
+            db.query(
+                "INSERT INTO idea (Idea_description, Budget, Category,  Duration,  Date_posted, IdNo, Idea_name) VALUES (?,?,?,?,?,?,?)",
+                [Idea_description, Budget, Category, Duration, Date_posted, IdNo, Idea_name],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.send("Idea Successfully Created");
+                    }
+                }
+            );
         }
-    );
+    });
+
+});
+
+app.get("/idea/id", (req, res) => {
+    // console.log(req.params);
+    // console.log(req.query);
+    const Idea_Id = req.query.Idea_Id
+    // console.log(P_Id);
+    db.query(`SELECT * FROM idea WHERE Idea_Id = ${Idea_Id}`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
 });
 
 
@@ -98,24 +240,64 @@ app.get("/problem", (req, res) => {
     });
 });
 
+app.get("/problem/id", (req, res) => {
+    // console.log(req.params);
+    // console.log(req.query);
+    const P_Id = req.query.P_Id
+    // console.log(P_Id);
+    db.query(`SELECT * FROM problem WHERE P_ID = ${P_Id}`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+
 app.post("/problem", (req, res) => {
     const P_Title = req.body.P_Title;
     const P_description = req.body.P_description;
     const Category = req.body.Category
     const Date_posted = req.body.Date_posted
-    const IdNo = req.body.IdNo
 
-    db.query(
-        "INSERT INTO PROBLEM(P_Title, Category, P_description,  Date_posted,  IdNo) VALUES (?,?,?,?,?)",
-        [P_Title, P_description, Category, Date_posted, IdNo],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                res.send("Problem Post Successfully Created");
-            }
+    const UID = req.body.UID
+
+    // get the IdNo from members table 
+
+
+    db.query(`SELECT IdNo FROM members WHERE UID = '${UID}'`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            const IdNo = result[0].IdNo
+            console.log(IdNo);
+            db.query(
+                "INSERT INTO PROBLEM(P_Title, Category, P_description,  Date_posted,  IdNo) VALUES (?,?,?,?,?)",
+                [P_Title, Category, P_description, Date_posted, IdNo],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.send("Problem Post Successfully Created");
+                    }
+                }
+            );
         }
-    );
+    });
+    // console.log(IdNo);
+
+    // db.query(
+    //     "INSERT INTO PROBLEM(P_Title, Category, P_description,  Date_posted,  IdNo) VALUES (?,?,?,?,?)",
+    //     [P_Title, Category, P_description, Date_posted, IdNo],
+    //     (err, result) => {
+    //         if (err) {
+    //             console.log(err);
+    //         } else {
+    //             res.send("Problem Post Successfully Created");
+    //         }
+    //     }
+    // );
 });
 
 app.get("/internship", (req, res) => {
@@ -128,37 +310,70 @@ app.get("/internship", (req, res) => {
     });
 });
 
+app.get("/internship/id", (req, res) => {
+    // console.log(req.params);
+    // console.log(req.query);
+    const internship_Id = req.query.internship_Id
+    // console.log(P_Id);
+    db.query(`SELECT * FROM internship WHERE internship_Id = ${internship_Id}`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(res);
+            res.send(result);
+        }
+    });
+});
+
 app.post("/internship", (req, res) => {
     const Company_name = req.body.Company_name;
     const Department = req.body.Department;
     const Type = req.body.Type
     const Date_posted = req.body.Date_posted
-    const IdNo = req.body.IdNo
 
-    db.query(
-        "INSERT INTO internship(Company_name, Department, Type, Date_posted, IdNo) VALUES (?,?,?,?,?)",
-        [Company_name, Department, Type, Date_posted, IdNo],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                res.send("Internship Post Successfully Created");
-            }
+
+    const UID = req.body.UID
+
+    // get the IdNo from members table 
+
+
+    db.query(`SELECT IdNo FROM members WHERE UID = '${UID}'`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            const IdNo = result[0].IdNo
+            console.log(IdNo);
+            db.query(
+                "INSERT INTO internship(Company_name, Department, Type, Date_posted, IdNo) VALUES (?,?,?,?,?)",
+                [Company_name, Department, Type, Date_posted, IdNo],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.send("Internship Post Successfully Created");
+                    }
+                }
+            );
         }
-    );
+    });
+
 });
 
 
 
-// app.get("/user", (req, res) => {
-//     db.query("SELECT * FROM user", (err, result) => {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             res.send(result);
-//         }
-//     });
-// });
+app.get("/member/id", (req, res) => {
+    // console.log(req.params);
+    // console.log(req.query);
+    const IdNo = req.query.IdNo
+    // console.log(P_Id);
+    db.query(`SELECT * FROM members WHERE IdNo = ${IdNo}`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
 
 
 app.get('/', (req, res) => res.json({ message: "Server is running on PORT 3001" }));
